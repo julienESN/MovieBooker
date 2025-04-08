@@ -10,8 +10,13 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   //https://docs.nestjs.com/openapi/introduction
   const config = new DocumentBuilder()
-    .setTitle("API d'authentification")
-    .setDescription("API pour gérer l'authentification des utilisateurs")
+    .setTitle('API pour MoovieBooker')
+    .setDescription(
+      '<a href="https://github.com/julienESN/MovieBooker" target="_blank">Lien vers le repo Git </a>',
+    )
+    .setExternalDoc('Doc utilisé (NestJs):', 'https://docs.nestjs.com/')
+
+    .setContact('Julien', 'https://jesn.fr', 'julien.esnau@gmail.com')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
