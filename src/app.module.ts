@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { MoviesModule } from './movies/movies.module';
 
 //https://docs.nestjs.com/techniques/database
 //Used this doc, used config service for not hardcoding the database connection
@@ -26,10 +27,11 @@ import { UserModule } from './user/user.module';
         password: configService.get<string>('DB_PASSWORD', ''),
         database: configService.get<string>('DB_NAME', 'moviebooker'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        // synchronize: true,
+        synchronize: true,
       }),
       inject: [ConfigService],
     }),
+    MoviesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
