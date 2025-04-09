@@ -50,7 +50,6 @@ export class MoviesService {
     const response = await firstValueFrom(
       this.httpService.get(url, { headers }),
     );
-    console.log('response', response.data);
     return response.data;
   }
 
