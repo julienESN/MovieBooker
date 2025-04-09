@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { MoviesModule } from './movies/movies.module';
+import { ReservationModule } from './reservation/reservation.module';
 
 //https://docs.nestjs.com/techniques/database
 //Used this doc, used config service for not hardcoding the database connection
@@ -32,6 +33,7 @@ import { MoviesModule } from './movies/movies.module';
       inject: [ConfigService],
     }),
     MoviesModule,
+    ReservationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
