@@ -26,7 +26,7 @@ import { ReservationModule } from './reservation/reservation.module';
         port: configService.get<number>('DB_PORT', 5432),
         username: configService.get<string>('DB_USERNAME', 'postgres'),
         password: configService.get<string>('DB_PASSWORD', ''),
-        database: configService.get<string>('DB_NAME', 'moviebooker'),
+        database: configService.get<string>('DB_NAME', 'moviebooker_53w1'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
       }),
