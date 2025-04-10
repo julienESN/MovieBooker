@@ -1,98 +1,325 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# MovieBooker API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+https://moviebooker-0yos.onrender.com/api
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+- MovieBooker est une API permettant aux utilisateurs de consulter des films et de réserver des séances. L'application est construite avec NestJS et propose une authentification JWT, une intégration avec l'API TMDB et un système de réservation.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🚀 Fonctionnalités
 
-## Project setup
+- **Authentification**: Inscription et connexion des utilisateurs avec JWT
+- **Catalogue de Films**: Intégration avec l'API TMDB pour accéder à des milliers de films
+  - Films à l'affiche
+  - Recherche par titre
+  - Détails d'un film
+  - Liste des genres
+- **Gestion des Réservations**:
+  - Création de réservations pour des films
+  - Gestion des créneaux de 2h par film
+  - Vérification des conflits pour éviter les chevauchements
+  - Consultation et annulation des réservations
 
-```bash
-$ npm install
-```
+## 📋 Prérequis
 
-## Compile and run the project
+- Node.js (v16+)
+- PostgreSQL
+- API TMDB (J'ai laissé mon bearer token dans le code, mais vous pouvez le remplacer par le vôtre)
+
+## 🔧 Installation
+
+1. **Cloner le dépôt**
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/votre-nom/moviebooker.git
+cd moviebooker
+cd auth-api
 ```
 
-## Run tests
+2. **Installer les dépendances**
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Deployment
+3. **Configuration des variables d'environnement**
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Créez un fichier `.env` à la racine du projet:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=votre_mot_de_passe
+DB_NAME=moviebooker
+JWT_SECRET=votre_secret_jwt_ultra_securise
+JWT_EXPIRES_IN=24h
+```
+
+4. **Créer la base de données PostgreSQL**
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+createdb moviebooker
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+5. **Lancer l'application**
 
-## Resources
+```bash
+# Mode développement
+npm run start:dev
 
-Check out a few resources that may come in handy when working with NestJS:
+# Mode production
+npm run build
+npm run start:prod
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## 📚 Documentation API (Swagger)
 
-## Support
+Une fois l'application lancée, la documentation Swagger est disponible à l'adresse:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+http://localhost:3000/api
+```
 
-## Stay in touch
+### Utilisation de Swagger
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+1. **Authentification**:
 
-## License
+   - Utilisez d'abord les endpoints `/auth/register` ou `/auth/login` pour obtenir un token JWT
+   - Cliquez sur le bouton de cadenas (🔒) en haut à droite
+   - Entrez votre token au format `votre_token_jwt_ici`
+   - Cliquez sur "Authorize"
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+2. **Tester les endpoints**:
+   - Tous les endpoints nécessitant une authentification sont marqués d'un cadenas
+   - Cliquez sur un endpoint pour l'ouvrir
+   - Remplissez les paramètres nécessaires
+   - Cliquez sur "Execute" pour tester
+
+## 🏛️ Architecture du Projet
+
+```
+src/
+├── auth/                # Module d'authentification
+│   ├── dto/             # Data Transfer Objects
+│   ├── guards/          # Guards pour la protection des routes
+│   └── strategies/      # Stratégies Passport
+├── movies/              # Module de gestion des films (TMDB)
+│   ├── dto/
+│   └── interfaces/
+├── reservation/         # Module de réservation
+│   ├── dto/
+│   └── entities/
+├── user/                # Module utilisateur
+│   ├── entities/
+│   └── models/
+└── main.ts              # Point d'entrée de l'application
+```
+
+## 📝 Exemples d'utilisation de l'API
+
+### 1. Inscription d'un utilisateur
+
+```http
+POST /auth/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "name": "John Doe",
+  "password": "Password123!"
+}
+
+// Réponse en cas de succès
+{
+  "user": {
+    "id": 1,
+    "email": "user@example.com",
+    "name": "John Doe",
+    "createdAt": "2025-04-07T12:58:08.566Z",
+    "updatedAt": "2025-04-07T12:58:08.566Z"
+  },
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+### 2. Connexion
+
+```http
+POST /auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "Password123!"
+}
+
+// Réponse
+{
+  "user": {
+    "id": 1,
+    "email": "user@example.com",
+    "name": "John Doe",
+    "createdAt": "2025-04-07T12:58:08.566Z",
+    "updatedAt": "2025-04-07T12:58:08.566Z"
+  },
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+### 3. Obtenir les films à l'affiche
+
+```http
+GET /movies/now_playing
+Authorization: Bearer votre_token_jwt
+
+// Réponse (partielle)
+{
+  "dates": {
+    "maximum": "2025-04-16",
+    "minimum": "2025-03-05"
+  },
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/2Nti3gYAX513wvhp8IiLL6ZDyOm.jpg",
+      "genre_ids": [10751, 35, 12, 14],
+      "id": 950387,
+      "original_language": "en",
+      "original_title": "A Minecraft Movie",
+      "overview": "Four misfits find themselves struggling with ordinary problems...",
+      "popularity": 1004.1124,
+      "poster_path": "/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg",
+      "release_date": "2025-03-31",
+      "title": "A Minecraft Movie",
+      "video": false,
+      "vote_average": 6.028,
+      "vote_count": 321
+    },
+    // autres films...
+  ]
+}
+```
+
+### 4. Recherche de films
+
+```http
+GET /movies/search?query=Titanic
+Authorization: Bearer votre_token_jwt
+
+// Réponse similaire à now_playing avec les résultats de recherche
+```
+
+### 5. Détails d'un film par ID
+
+```http
+GET /movies/11021
+Authorization: Bearer votre_token_jwt
+
+// Réponse avec les détails du film Titanic
+```
+
+### 6. Liste des genres de films
+
+```http
+GET /movies
+Authorization: Bearer votre_token_jwt
+
+// Réponse avec la liste des genres
+```
+
+### 7. Création d'une réservation
+
+```http
+POST /reservations
+Content-Type: application/json
+Authorization: Bearer votre_token_jwt
+
+{
+  "movieId": 11021,
+  "movieTitle": "Titanic",
+  "startTime": "2025-04-10T18:00:00.000Z"
+}
+
+// Réponse
+{
+  "id": 2,
+  "movieId": 11021,
+  "movieTitle": "Titanic",
+  "userId": 1,
+  "startTime": "2025-04-10T18:00:00.000Z",
+  "endTime": "2025-04-10T20:00:00.000Z",
+  "createdAt": "2025-04-09T13:01:22.463Z",
+  "updatedAt": "2025-04-09T13:01:22.463Z"
+}
+```
+
+### 8. Récupération des réservations
+
+```http
+GET /reservations
+Authorization: Bearer votre_token_jwt
+
+// Réponse
+[
+  {
+    "id": 2,
+    "movieId": 11021,
+    "movieTitle": "Titanic",
+    "userId": 1,
+    "startTime": "2025-04-10T18:00:00.000Z",
+    "endTime": "2025-04-10T20:00:00.000Z",
+    "createdAt": "2025-04-09T13:01:22.463Z",
+    "updatedAt": "2025-04-09T13:01:22.463Z"
+  }
+]
+```
+
+### 9. Créneaux disponibles
+
+```http
+GET /reservations/available?date=2025-04-09
+Authorization: Bearer votre_token_jwt
+
+// Réponse
+[
+  {
+    "startTime": "2025-04-09T08:00:00.000Z",
+    "endTime": "2025-04-09T10:00:00.000Z"
+  },
+  {
+    "startTime": "2025-04-09T10:00:00.000Z",
+    "endTime": "2025-04-09T12:00:00.000Z"
+  },
+  // autres créneaux disponibles...
+]
+```
+
+### 10. Récupérer une réservation par ID
+
+```http
+GET /reservations/2
+Authorization: Bearer votre_token_jwt
+
+// Réponse avec les détails de la réservation
+```
+
+### 11. Annuler une réservation
+
+```http
+DELETE /reservations/2
+Authorization: Bearer votre_token_jwt
+
+// Réponse
+{
+  "message": "Réservation annulée avec succès"
+}
+```
+
+## 📄 Licence
+
+Ce projet est sous licence [MIT](LICENSE).
+
+## 👥 Contribution
+
+Les contributions sont les bienvenues! N'hésitez pas à ouvrir une issue ou une pull request.
